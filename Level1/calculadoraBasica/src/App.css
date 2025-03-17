@@ -1,0 +1,140 @@
+/* App.css */
+html{
+  font-size: 62.5%;
+  box-sizing: border-box;
+  scroll-snap-type: y mandatory;
+}
+
+/* Hack Box Model */
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* Opcional: Heredar el fondo negro en todos los elementos */
+* {
+  background-color: inherit;
+  color: white !important; /* Texto blanco por defecto */
+}
+
+body {
+  background-color: #17202a ; /* Fondo negro puro */
+  min-height: 100vh; /* Cubre toda la altura de la pantalla */
+  font-family: 'Roboto' sans-serif;
+}
+
+.header{
+  background-color: #273746;
+  width: 100%;
+  padding: 10px;
+}
+
+h1{
+  font-weight: 700;
+}
+
+h4{
+  font-size: 2rem;
+}
+
+.btn-circle{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.8rem;
+
+}
+
+.btn-operator{
+  background-color: #f39c12 ;
+  font-weight: 700;
+}
+
+.btn-operator:hover{
+  background-color: #b9770e ;
+}
+
+.display,
+.calculadora{
+  background-color: #273746;
+}
+
+.display{
+  color: white; /* Texto blanco */
+  border: none;
+  outline: none;
+  font-size: 2.8rem;
+  text-align: right;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.display:focus {
+  background-color: #273746;
+  color: white ;
+  box-shadow: none; /* Elimina el borde azul al hacer foco */
+}
+
+
+/* Boton hitorial */
+.history-btn{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* hitorial desplegable */
+.history-dropdown{
+  position: absolute;
+  top: 6rem;
+  right: 2rem;
+  width: 25rem;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: .8rem;
+  padding: 1rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.sci-btn{
+  background-color: #f39c12 ;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  width: 10rem;
+  cursor: pointer;
+}
+
+.sci-btn:hover{
+  background-color: #b9770e ;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+  gap: .8rem; /* Espacio entre botones */
+  padding: 1rem;
+  justify-content: center;
+}
+
+.btn-circle {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-operator-sci{
+  font-weight: 400;
+}
+
+.btn-clean{
+  background-color: #e74c3c;
+  width: 5rem;
+  height: 5rem;
+  font-size: 2rem;
+}
