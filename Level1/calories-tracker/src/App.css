@@ -1,0 +1,42 @@
+/* App.css */
+:root{
+    --colorPrincipal: #5b2c6f;
+    --colorPrincipalLight:  #7d3c98;
+    --blanco: #fff;
+}
+
+html{
+    font-size: 62.5%;
+    box-sizing: border-box;
+    scroll-snap-type: y mandatory;
+  }
+  
+  /* Hack Box Model */
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+
+  .header{
+    background-color: var(--colorPrincipal);
+  }
+
+  .section_formulario{
+    background-color:var(--colorPrincipalLight) ;
+  }
+
+  .form_btn{
+    background-color: var(--colorPrincipalLight);
+    border-radius: .5rem;
+    text-transform: uppercase;
+    color: var(--blanco);
+    cursor: pointer;
+    padding: 1rem;
+    font-weight: 700;
+    border: none; 
+  }
+
+
+  .form_btn:hover{
+    background-color: var(--colorPrincipal);
+  }
