@@ -1,14 +1,33 @@
-import { useState, ChangeEvent } from "react"
-import { categories } from "../data/data"
+import { useState, ChangeEvent, Dispatch, useEffect } from "react";
+import {v4 as uuidv4} from 'uuid';
+import { categories } from "../data/data";
 import { Activity } from "../types/types";
+import { ActivityActions,  ActivityState } from '../reducers/activity-reducer';
 
-export default function Form() {
 
-    const [activity, setActivity] = useState<Activity>({
-        category: 1,
-        name: '',
-        calories: 0,
-    })
+type FormProps = {
+    dispacth: Dispatch<ActivityActions>,
+    state: ActivityState,
+}
+
+const initial: Activity= {
+    id : uuidv4(),
+    category: 1,
+    name: '',
+    calories: 0,
+}
+
+export default function Form({dispacth, state}: FormProps) {
+
+    const [activity, setActivity] = useState<Activity>(initial);
+
+    useEffect(() => {
+        if(state.activeId) {
+           const selectedActivity = state.activities.filter((stateActivity) => stateActivity.id === state.activeId)[0]
+           setActivity(selectedActivity);
+        }
+    }, [state.activeId]
+);
 
     const handleChange = (e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
         const isNumberField = ['category', 'calories'].includes(e.target.id);
@@ -29,14 +48,21 @@ export default function Form() {
     }
 
     const handleChangeForm = (e:React.FormEvent<HTMLFormElement>) =>{
-        console.log(e)
+        e.preventDefault()
+
+        dispacth({type: 'save-activity', payload: {newActivity: activity}})
+
+        setActivity({
+            ...initial,
+            id: uuidv4()
+        })
     }
 
 
     return (
         <form 
             className="d-flex flex-column gap-3 bg-white shadow-lg  p-5 rounded"
-            onChange={handleChangeForm}
+            onSubmit={handleChangeForm}
         >
             <div className="row gap-3">
                 <label htmlFor="category" className="fs-4 fw-bold">Categoria</label>
@@ -65,7 +91,7 @@ export default function Form() {
                     type="text"
                     id="name"
                     className="border border-secondary p-2 rounded w-100 bg-white fs-3"
-                    placeholder="Ej. comida, biccicleta, jujitsu, postre etc.."
+                    placeholder="Ej. comida, bicicleta, jujitsu, postre etc.."
                     value={activity.name}
                     onChange={handleChange}
                 />
@@ -84,8 +110,9 @@ export default function Form() {
                 /> 
             </div>
 
-            <input type="submit"
-                className="form_btn disabled opacity-25 curosor" 
+            <input 
+                type="submit"
+                className={`form_btn ${!isAvailableToSend() ? "opacity-25" : ""}`}  
                 disabled={!isAvailableToSend()}
                 value={activity.category === 1 ? "Registrar comida" : "Guardar ejercicio"} 
             />
